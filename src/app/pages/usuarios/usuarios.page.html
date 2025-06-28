@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gerenciamento de Usuários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Lista Usuários -->
+  <ion-list>
+    <ion-item *ngFor="let usuario of usuarios" button (click)="iniciarEdicao(usuario)">
+      <ion-label>
+        <h2>{{ usuario.nome }}</h2>
+        <p>{{ usuario.email }} - {{ usuario.nivel }}</p>
+      </ion-label>
+      <ion-button slot="end" color="danger" fill="clear" (click)="confirmarExclusao(usuario); $event.stopPropagation();">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="success" (click)="iniciarCriacao()">+ Novo Usuário</ion-button>
+
+  <!-- Formulário de Criação/Edição -->
+  <div *ngIf="modoEdicao || usuarioEditando === null" class="form-container">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
+        Nome deve ter pelo menos 3 caracteres.
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Informe um email válido.
+      </ion-note>
+
+      <ion-item>
+        <ion-label>Nível de Permissão</ion-label>
+        <ion-select formControlName="nivel">
+          <ion-select-option *ngFor="let nivel of niveis" [value]="nivel">{{ nivel }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        {{ modoEdicao ? 'Salvar Alterações' : 'Criar Usuário' }}
+      </ion-button>
+      <ion-button expand="block" color="medium" (click)="cancelarEdicao()" *ngIf="modoEdicao">Cancelar</ion-button>
+    </form>
+  </div>
+</ion-content>

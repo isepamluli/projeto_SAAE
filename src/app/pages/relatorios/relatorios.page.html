@@ -1,0 +1,63 @@
+<ion-content fullscreen class="login-bg">
+  <div class="login-wrapper show">
+
+    <h2>Relatórios</h2>
+    <p>Visualize e exporte os agendamentos registrados</p>
+
+    <!-- Filtros -->
+    <ion-item lines="none" class="input-item">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-datetime display-format="DD/MM/YYYY" placeholder="Data de Início" [(ngModel)]="dataInicio"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-datetime display-format="DD/MM/YYYY" placeholder="Data de Fim" [(ngModel)]="dataFim"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item">
+      <ion-icon name="business-outline" slot="start"></ion-icon>
+      <ion-select placeholder="Filtrar por Sala" [(ngModel)]="salaSelecionada">
+        <ion-select-option value="">Todas</ion-select-option>
+        <ion-select-option *ngFor="let sala of salas" [value]="sala">{{ sala }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Botões -->
+    <ion-button expand="block" color="primary" (click)="gerarRelatorio()">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      Gerar Relatório
+    </ion-button>
+
+    <ion-button expand="block" color="success" (click)="exportarExcel()">
+      <ion-icon slot="start" name="download-outline"></ion-icon>
+      Exportar Excel
+    </ion-button>
+
+    <ion-button expand="block" color="danger" (click)="exportarPDF()">
+      <ion-icon slot="start" name="document-outline"></ion-icon>
+      Exportar PDF
+    </ion-button>
+
+    <!-- Lista de Resultados -->
+    <div *ngIf="agendamentosFiltrados.length > 0; else vazio">
+      <ion-card *ngFor="let item of agendamentosFiltrados" class="relatorio-card">
+        <ion-card-header>
+          <ion-card-title>{{ item.evento }}</ion-card-title>
+          <ion-card-subtitle>{{ item.data }} - {{ item.sala }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Funcionário:</strong> {{ item.funcionario }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Caso não tenha dados -->
+    <ng-template #vazio>
+      <ion-text color="medium">
+        <p style="margin-top: 2rem;">Nenhum dado para exibir. Ajuste os filtros acima.</p>
+      </ion-text>
+    </ng-template>
+
+  </div>
+</ion-content>

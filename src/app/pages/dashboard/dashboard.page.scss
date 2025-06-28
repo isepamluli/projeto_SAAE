@@ -1,0 +1,114 @@
+ion-content {
+  --background: #f8f9ff;
+}
+
+.welcome-section {
+  text-align: center;
+  margin: 2rem 0 1.5rem;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+  }
+
+  p {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.dashboard-grid {
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 82, 212, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 82, 212, 0.15);
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 0.5rem;
+
+    &.danger {
+      color: var(--ion-color-danger);
+    }
+  }
+
+  ion-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  ion-card-content {
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.recent-section {
+  margin-top: 1.5rem;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ion-color-primary);
+    margin-bottom: 1rem;
+  }
+
+  ion-item {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.75rem;
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+
+    h3 {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    ion-badge {
+      font-weight: 600;
+    }
+  }
+}
+.dash-card {
+  text-align: center;
+  --background: var(--ion-color-light);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  ion-icon {
+    font-size: 3rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--ion-color-dark);
+  }
+}

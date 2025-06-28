@@ -1,0 +1,61 @@
+.login-bg {
+  --background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.login-wrapper {
+  background: #fff;
+  width: 100%;
+  max-width: 550px;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeInUp 0.8s forwards;
+  margin: 2rem auto;
+}
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0052d4;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.input-item {
+  --background: #eef3ff;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+ion-button {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.relatorio-card {
+  margin-top: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,71 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="checkNotifications()">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openScheduling1()">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <div class="welcome-section">
+    <h1>Olá, Usuário!</h1>
+    <p>Bem-vindo ao Sistema de Agendamento Escolar</p>
+  </div>
+
+  <ion-grid class="dashboard-grid">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="dashboard-card" (click)="openScheduling()">
+          <ion-icon name="calendar-outline" class="card-icon"></ion-icon>
+          <ion-card-title>Agendar Sala</ion-card-title>
+          <ion-card-content>Reservar ambiente</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="dashboard-card" (click)="viewAvailability()">
+          <ion-icon name="time-outline" class="card-icon"></ion-icon>
+          <ion-card-title>Disponibilidade</ion-card-title>
+          <ion-card-content>Ver horários livres</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="dashboard-card" (click)="cancelBooking()">
+          <ion-icon name="close-circle-outline" class="card-icon danger"></ion-icon>
+          <ion-card-title>Cancelar</ion-card-title>
+          <ion-card-content>Remover agendamento</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="dashboard-card" (click)="viewReports()">
+          <ion-icon name="document-text-outline" class="card-icon"></ion-icon>
+          <ion-card-title>Relatórios</ion-card-title>
+          <ion-card-content>Ver estatísticas</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="recent-section">
+    <h2>Agendamentos Recentes</h2>
+    <ion-list lines="none">
+      <ion-item *ngFor="let item of recentBookings">
+        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.date }} • {{ item.time }} | {{ item.room }}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="item.statusColor">{{ item.status }}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

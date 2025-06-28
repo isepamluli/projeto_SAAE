@@ -1,0 +1,7 @@
+{
+  "name": "SaaE_05",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

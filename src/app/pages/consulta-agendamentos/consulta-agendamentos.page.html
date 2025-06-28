@@ -1,0 +1,48 @@
+<ion-content fullscreen class="login-bg">
+  <div class="login-wrapper" [class.show]="true">
+    <h2>Agendamentos</h2>
+    <p>Consulte e gerencie os agendamentos</p>
+
+    <ion-item lines="none" class="input-item">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      <ion-select placeholder="Filtrar por Status" [(ngModel)]="filtroStatus" (ionChange)="filtrarAgendamentos()">
+        <ion-select-option value="">Todos</ion-select-option>
+        <ion-select-option value="Ativo">Ativo</ion-select-option>
+        <ion-select-option value="Cancelado">Cancelado</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-datetime
+        display-format="DD/MM/YYYY"
+        [(ngModel)]="filtroData"
+        (ionChange)="filtrarAgendamentos()"
+        placeholder="Filtrar por Data">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-list *ngIf="agendamentosFiltrados.length > 0; else semAgendamentos">
+      <ion-item *ngFor="let agendamento of agendamentosFiltrados" lines="none" class="input-item">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>{{ agendamento.data }} - {{ agendamento.sala }}</h3>
+          <p>{{ agendamento.horaInicio }} às {{ agendamento.horaFim }}</p>
+          <p>Status: {{ agendamento.status }}</p>
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="verDetalhes(agendamento)">
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" fill="clear" color="danger" (click)="cancelarAgendamento(agendamento)">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #semAgendamentos>
+      <ion-text color="medium">
+        Nenhum agendamento encontrado.
+      </ion-text>
+    </ng-template>
+  </div>
+</ion-content>

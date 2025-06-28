@@ -1,0 +1,41 @@
+/* Mantém o padrão de padding das páginas */
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+/* Ajusta itens da lista para ficar alinhados igual aos outros */
+ion-list ion-item {
+  --padding-start: 0;
+  --min-height: 56px;
+}
+
+/* Botão de exclusão com ícone pequeno e alinhado */
+ion-button[fill="clear"] {
+  --padding-start: 6px;
+  --padding-end: 6px;
+  --min-width: 36px;
+}
+
+/* Formulário com campos espaçados igual outras telas */
+form ion-item {
+  margin-bottom: 12px;
+}
+
+/* Notas de validação aparecem com estilo discreto */
+ion-note {
+  font-size: 0.8rem;
+  margin-left: 4px;
+}
+
+/* Botões principais com margem superior para espaçamento */
+ion-button {
+  margin-top: 16px;
+}
+
+/* Container do formulário para separar visualmente da lista */
+.form-container {
+  margin-top: 24px;
+}
