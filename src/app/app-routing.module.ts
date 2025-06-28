@@ -106,6 +106,7 @@ const routes: Routes = [
   path: 'minhas-reservas',
   loadComponent: () => import('./pages/minhas-reservas/minhas-reservas.page').then(m => m.MinhasReservasPage) 
   },
+  
 
 
 
