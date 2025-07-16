@@ -1,0 +1,52 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Visualização Detalhada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="reserva-grid">
+    <ion-card *ngFor="let reserva of reservas" class="reserva-card">
+      <ion-card-header>
+        <ion-card-title>Detalhes da Reserva</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Solicitante:</h3>
+            <p>{{ reserva.solicitante }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Sala:</h3>
+            <p>{{ reserva.sala }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Data:</h3>
+            <p>{{ reserva.data }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Horário:</h3>
+            <p>{{ reserva.horario }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-button expand="block" fill="outline" color="medium" (click)="voltar()">
+  Voltar
+</ion-button>
+
+
+</ion-content>

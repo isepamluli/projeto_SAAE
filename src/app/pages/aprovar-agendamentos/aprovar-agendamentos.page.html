@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Aprovar/Recusar Agendamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <div *ngIf="agendamentos.length === 0" class="empty-message">
+    <p>Nenhum agendamento pendente no momento.</p>
+  </div>
+
+  <ion-list *ngIf="agendamentos.length > 0">
+    <ion-item *ngFor="let agendamento of agendamentos" lines="none" [class.aprovado]="agendamento.status === 'aprovado'" [class.recusado]="agendamento.status === 'recusado'">
+      <ion-label>
+        <h2>{{ agendamento.solicitante }}</h2>
+        <p><strong>Sala:</strong> {{ agendamento.sala }}</p>
+        <p><strong>Data:</strong> {{ agendamento.data }} | <strong>Horário:</strong> {{ agendamento.horario }}</p>
+        <p *ngIf="agendamento.status !== 'pendente'"><strong>Status:</strong> {{ agendamento.status | titlecase }}</p>
+      </ion-label>
+
+      <ion-button size="small" color="success" fill="outline" slot="end" *ngIf="agendamento.status === 'pendente'" (click)="aprovar(agendamento.id)">
+        Aprovar
+      </ion-button>
+      <ion-button size="small" color="danger" fill="outline" slot="end" *ngIf="agendamento.status === 'pendente'" (click)="recusar(agendamento.id)">
+        Recusar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

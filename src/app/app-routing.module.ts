@@ -146,6 +146,19 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/ver-logs/ver-logs.page').then(m => m.VerLogsPage),
   },
+  {
+  path: 'visualizacao-detalhada',
+  loadComponent: () =>
+    import('./pages/visualizacao-detalhada/visualizacao-detalhada.page').then(m => m.VisualizacaoDetalhadaPage),
+  },
+  {
+  path: 'aprovar-agendamentos',
+  loadComponent: () =>
+    import('./pages/aprovar-agendamentos/aprovar-agendamentos.page').then(m => m.AprovarAgendamentosPage),
+  },
+
+
+  
 ];
 
 @NgModule({

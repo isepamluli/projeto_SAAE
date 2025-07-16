@@ -1,0 +1,43 @@
+ion-content {
+  --background: #f9fafc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+ion-list {
+  margin-top: 1rem;
+}
+
+ion-item {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+  --min-height: 80px;
+  transition: background-color 0.3s ease;
+}
+
+ion-item.aprovado {
+  background-color: #e6f4ea;
+}
+
+ion-item.recusado {
+  background-color: #fdecea;
+}
+
+h2 {
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+}
+
+p {
+  font-size: 0.9rem;
+  margin: 2px 0;
+}
+
+.empty-message {
+  margin-top: 4rem;
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+}

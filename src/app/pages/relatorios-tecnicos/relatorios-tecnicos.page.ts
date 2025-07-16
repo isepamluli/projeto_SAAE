@@ -44,7 +44,7 @@ export class RelatoriosTecnicosPage {
         { usuario: 'ana.paula', acao: 'Login no sistema', data: '2025-07-15 08:00' },
         { usuario: 'joao.silva', acao: 'Alterou senha', data: '2025-07-15 09:15' },
         { usuario: 'maria.lima', acao: 'Cancelou agendamento', data: '2025-07-15 10:30' },
-        { usuario: 'ana.paula', acao: 'Gerou relatório', data: '2025-07-15 11:45' },
+        { usuario: 'ana.paula', acao: 'Gerou relatório', data: '2025-07-21 11:45' },
       ];
 
       const f = this.form.value;

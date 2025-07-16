@@ -82,7 +82,7 @@ export class DashboardPage implements OnInit {
   this.navCtrl.navigateForward('/gestao-prof');
   }
   openDetalhesAgendamentos() {
-  this.navCtrl.navigateForward('/detalhes-agendamentos');
+  this.navCtrl.navigateForward('/visualizacao-detalhada');
   }
   openGerenciarSalas() {
   this.navCtrl.navigateForward('/consulta-salas');
@@ -93,6 +93,10 @@ export class DashboardPage implements OnInit {
   generateReports() {
     this.navCtrl.navigateForward('/relatorios-tecnicos');
   }
+  openAprovarAgendamentos() {
+  this.navCtrl.navigateForward('/aprovar-agendamentos');
+  }
+
 
 
 
