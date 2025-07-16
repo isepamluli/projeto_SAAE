@@ -89,6 +89,11 @@ const routes: Routes = [
       import('./pages/relatorios/relatorios.page').then(m => m.RelatoriosPage),
   },
   {
+    path: 'relatorios-tecnicos',
+    loadComponent: () =>
+      import('./pages/relatorios-tecnicos/relatorios-tecnicos.page').then(m => m.RelatoriosTecnicosPage),
+  },
+  {
     path: 'perfil',
     loadComponent: () =>
       import('./pages/user-profile/user-profile.page').then(m => m.UserProfilePage),
@@ -118,17 +123,29 @@ const routes: Routes = [
       import('./pages/cancelar-agendamento/cancelar-agendamento.page').then(m => m.CancelarAgendamentoPage),
   },
   {
-  path: 'cadastro-reserva',
-  loadComponent: () =>
-    import('./pages/cadastro-reserva/cadastro-reserva.page').then(m => m.CadastroReservaPage)
+    path: 'cadastro-reserva',
+    loadComponent: () =>
+      import('./pages/cadastro-reserva/cadastro-reserva.page').then(m => m.CadastroReservaPage),
   },
   {
-  path: 'cadastro-reserva-data',
-  loadComponent: () => import('./pages/cadastro-reserva-data/cadastro-reserva-data.page').then(m => m.CadastroReservaDataPage)
+    path: 'cadastro-reserva-data',
+    loadComponent: () =>
+      import('./pages/cadastro-reserva-data/cadastro-reserva-data.page').then(m => m.CadastroReservaDataPage),
   },
 
+  // Gestão de Professores (lazy loaded module)
+  {
+    path: 'gestao-prof',
+    loadChildren: () =>
+      import('./pages/gestao-prof/gestao-prof.module').then(m => m.GestaoProfPageModule),
+  },
 
-
+  // Ver Logs (standalone component)
+  {
+    path: 'ver-logs',
+    loadComponent: () =>
+      import('./pages/ver-logs/ver-logs.page').then(m => m.VerLogsPage),
+  },
 ];
 
 @NgModule({

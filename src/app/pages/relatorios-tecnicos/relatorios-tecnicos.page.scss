@@ -1,0 +1,121 @@
+ion-content {
+  --background: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.welcome-section {
+  text-align: center;
+  margin: 2.5rem 0 2rem;
+}
+
+.welcome-section h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.filter-section {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.filter-section:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.filter-section ion-item {
+  --background: transparent;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  --min-height: 50px;
+}
+
+.filter-section ion-select,
+.filter-section ion-datetime,
+.filter-section ion-input {
+  font-size: 1rem;
+  --padding-start: 0.8rem;
+  --padding-end: 0.8rem;
+}
+
+ion-button {
+  font-weight: 600;
+  border-radius: 10px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 3px 8px rgba(0, 82, 212, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+ion-button:enabled:hover {
+  box-shadow: 0 5px 15px rgba(0, 82, 212, 0.35);
+}
+
+.reports-grid {
+  margin-bottom: 3rem;
+}
+
+.report-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 82, 212, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background: #fff;
+}
+
+.report-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 82, 212, 0.15);
+}
+
+.card-icon {
+  font-size: 3.5rem;
+  color: var(--ion-color-primary);
+  margin: 1.3rem auto 0.6rem;
+  transition: color 0.3s ease;
+}
+
+.report-card:hover .card-icon {
+  color: #004bb5;
+}
+
+ion-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  color: #222;
+  margin-bottom: 0.4rem;
+}
+
+ion-card-content {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  padding: 0 1.2rem 1.2rem;
+  line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .welcome-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .report-card {
+    border-radius: 14px;
+  }
+}

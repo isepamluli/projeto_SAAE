@@ -79,7 +79,7 @@ export class DashboardPage implements OnInit {
   this.navCtrl.navigateForward('/consulta-agendamentos');
   }
   openGestaoProfessores() {
-  this.navCtrl.navigateForward('/gestao-professores');
+  this.navCtrl.navigateForward('/gestao-prof');
   }
   openDetalhesAgendamentos() {
   this.navCtrl.navigateForward('/detalhes-agendamentos');
@@ -88,7 +88,7 @@ export class DashboardPage implements OnInit {
   this.navCtrl.navigateForward('/consulta-salas');
   }
   viewLogs() {
-    this.navCtrl.navigateForward('/logs');
+    this.navCtrl.navigateForward('/ver-logs');
   }
   generateReports() {
     this.navCtrl.navigateForward('/relatorios-tecnicos');

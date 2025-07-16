@@ -1,0 +1,66 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>Relatórios Técnicos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <div class="welcome-section">
+    <h1>Gerar Relatórios Técnicos</h1>
+    <p>Selecione os filtros e visualize os logs e ações do sistema.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="gerarRelatorio()">
+    <ion-item>
+      <ion-label>Tipo de Log</ion-label>
+      <ion-select formControlName="tipoLog" interface="popover">
+        <ion-select-option *ngFor="let tipo of tiposLog" [value]="tipo.value">
+          {{ tipo.label }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Data Início</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataInicio"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Data Fim</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataFim"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Usuário (opcional)</ion-label>
+      <ion-input formControlName="usuario" type="text" placeholder="Ex: ana.paula"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="carregando">
+      {{ carregando ? 'Gerando...' : 'Gerar Relatório' }}
+    </ion-button>
+
+    <ion-button expand="block" color="medium" (click)="limparFiltros()" type="button">
+      Limpar Filtros
+    </ion-button>
+  </form>
+
+  <div *ngIf="relatorios.length > 0" class="results-section">
+    <ion-list>
+      <ion-item *ngFor="let log of relatorios">
+        <ion-label>
+          <h3>{{ log.usuario }}</h3>
+          <p>{{ log.acao }}</p>
+          <small>{{ log.data }}</small>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" color="secondary" (click)="exportarCSV()">
+      Exportar CSV
+    </ion-button>
+  </div>
+
+  <ion-text *ngIf="!relatorios.length && !carregando" color="medium" class="ion-text-center">
+    Nenhum relatório gerado ainda.
+  </ion-text>
+</ion-content>

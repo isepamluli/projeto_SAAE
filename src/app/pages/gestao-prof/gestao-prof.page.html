@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gestão de Professores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Professores</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let prof of professores">
+          <ion-label>
+            <h2>{{ prof.nome }}</h2>
+            <p>{{ prof.email }}</p>
+            <p>Status: 
+              <strong [ngClass]="{ 'ativo': prof.ativo, 'inativo': !prof.ativo }">
+                {{ prof.ativo ? 'Ativo' : 'Inativo' }}
+              </strong>
+            </p>
+          </ion-label>
+          <ion-button fill="outline" color="success" (click)="ativarDesativar(prof)">
+            {{ prof.ativo ? 'Desativar' : 'Ativar' }}
+          </ion-button>
+          <ion-button fill="clear" (click)="editarProfessor(prof)">
+            Editar
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary"  (click)="abrirModalCadastro()">
+    + Adicionar Novo Professor
+  </ion-button>
+</ion-content>
