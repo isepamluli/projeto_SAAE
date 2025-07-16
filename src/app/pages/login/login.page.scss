@@ -1,16 +1,16 @@
-@import "~@ionic/angular/css/core.css"; 
+@import "~@ionic/angular/css/core.css";
 
-/* Estilos para o fundo da tela de login */
+/* Fundo com gradiente */
 .login-bg {
   --background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 1rem;
+  min-height: 100vh;
+  padding: 2rem 1rem;
 }
 
-/* Container do formulário de login */
+/* Container do formulário */
 .login-wrapper {
   background: #fff;
   width: 100%;
@@ -24,13 +24,16 @@
   animation: fadeInUp 0.8s forwards;
   margin: auto;
 
+  /* Novo ajuste de margem para não colar no topo */
+  margin-top: 60px;
+
   &.show {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Estilos para títulos e textos */
+/* Título */
 h2 {
   font-weight: 700;
   font-size: 2.5rem;
@@ -38,20 +41,20 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+/* Texto abaixo do título */
 p {
   margin-bottom: 2rem;
   color: #666;
   font-size: 1rem;
 }
 
-/* Estilos para os campos de entrada */
+/* Inputs estilizados */
 .input-item {
   margin-bottom: 1.5rem;
   --background: #eef3ff;
   border-radius: 50px;
   padding-left: 0.75rem;
   transition: all 0.3s ease;
-  box-shadow: 0 0 0 transparent;
   display: flex;
   align-items: center;
 
@@ -78,7 +81,7 @@ p {
   }
 }
 
-/* Estilos para o botão de login */
+/* Botão de login */
 .btn-login {
   --background: #0052d4;
   --background-activated: #003a9f;
@@ -87,10 +90,13 @@ p {
   border-radius: 50px;
   font-weight: 700;
   font-size: 1.2rem;
-  color: #fff;
+  color: #fff !important;
   height: 50px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
   &:hover {
     --background: #003a9f;
@@ -98,10 +104,13 @@ p {
   }
 
   .btn-text {
-    display: flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
   }
 
   ion-icon {
@@ -114,7 +123,7 @@ p {
   }
 }
 
-/* Estilos para as opções abaixo do formulário */
+/* Links abaixo do formulário */
 .options-row {
   margin-top: 1.5rem;
 
@@ -132,7 +141,7 @@ p {
   }
 }
 
-/* Estilo para o ícone olho de mostrar/ocultar senha */
+/* Ícone de mostrar/ocultar senha */
 .eye-icon {
   font-size: 1.4rem;
   color: #666;
@@ -146,7 +155,7 @@ p {
   }
 }
 
-/* Animação de entrada */
+/* Animação suave de entrada */
 @keyframes fadeInUp {
   from {
     opacity: 0;

@@ -16,17 +16,18 @@
         </ion-input>
       </ion-item>
 
-      <ion-item lines="none" class="input-item">
-        <ion-icon name="call-outline" slot="start"></ion-icon>
+     <ion-item lines="none" class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
         <ion-input
-          type="tel"
-          placeholder="Telefone"
-          [(ngModel)]="funcionario.telefone"
-          name="telefone"
+          type="email"
+          placeholder="E-mail"
+          [(ngModel)]="funcionario.email"
+          name="email"
           required
           clearInput>
         </ion-input>
       </ion-item>
+
 
       <ion-item lines="none" class="input-item">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>

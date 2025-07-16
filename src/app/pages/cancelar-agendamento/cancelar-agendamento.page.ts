@@ -14,17 +14,24 @@ export class CancelarAgendamentoPage {
   agendamentos = [
     {
       id: 1,
-      titulo: 'Reunião da Equipe',
-      sala: 'Sala 01',
+      titulo: 'Aula',
+      sala: 'Laboratório de Informática 1',
       data: '2025-06-10',
       hora: '14:00',
     },
     {
       id: 2,
-      titulo: 'Oficina de Robótica',
-      sala: 'Sala 03',
+      titulo: 'Aula ',
+      sala: 'Sala de vídeo 3',
       data: '2025-06-12',
       hora: '09:00',
+    },
+    {
+      id: 3,
+      titulo: 'Aula',
+      sala: 'Sala de vídeo 1',
+      data: '2025-06-10',
+      hora: '14:00',
     },
   ];
 

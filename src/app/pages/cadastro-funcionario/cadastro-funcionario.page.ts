@@ -16,10 +16,9 @@ import { Router } from '@angular/router';
   ]
 })
 export class CadastroFuncionarioPage {
-
   funcionario = {
     nome: '',
-    telefone: '',
+    email: '',  // ← substituto de telefone
     senha: '',
     confirmarSenha: '',
     tipo: ''
@@ -57,8 +56,6 @@ export class CadastroFuncionarioPage {
       this.loading = false;
       console.log('Funcionário cadastrado:', this.funcionario);
       await this.mostrarToast('Cadastro realizado com sucesso!', 'success');
-
-      // Redireciona para a dashboard
       this.router.navigate(['/dashboard']);
     }, 1500);
   }

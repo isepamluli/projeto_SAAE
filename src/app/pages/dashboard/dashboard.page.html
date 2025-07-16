@@ -30,13 +30,6 @@
           </ion-card>
         </ion-col>
         <ion-col size="6">
-          <ion-card class="dashboard-card" (click)="viewAvailability()">
-            <ion-icon name="time-outline" class="card-icon"></ion-icon>
-            <ion-card-title>Disponibilidade</ion-card-title>
-            <ion-card-content>Ver horários livres</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col size="6">
           <ion-card class="dashboard-card" (click)="cancelBooking()">
             <ion-icon name="close-circle-outline" class="card-icon danger"></ion-icon>
             <ion-card-title>Cancelar</ion-card-title>
@@ -186,29 +179,17 @@
       </ion-col>
       
       <!-- Novo botão adicionado aqui -->
-      <ion-col size="6">
-        <ion-card class="dashboard-card" (click)="openAprovarAgendamentos()">
-          <ion-icon name="checkmark-done-outline" class="card-icon"></ion-icon>
-          <ion-card-title>Aprovar Agendamentos</ion-card-title>
-          <ion-card-content>Aprovar ou recusar solicitações</ion-card-content>
-        </ion-card>
-      </ion-col>
+     <ion-col size="6">
+          <ion-card class="dashboard-card" (click)="openScheduling()">
+            <ion-icon name="calendar-outline" class="card-icon"></ion-icon>
+            <ion-card-title>Agendar Sala</ion-card-title>
+            <ion-card-content>Reservar ambiente</ion-card-content>
+          </ion-card>
+        </ion-col>
     </ion-row>
   </ion-grid>
 </ng-container>
 
 
-  <div class="recent-section">
-    <h2>Agendamentos Recentes</h2>
-    <ion-list lines="none">
-      <ion-item *ngFor="let item of recentBookings">
-        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
-        <ion-label>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.date }} • {{ item.time }} | {{ item.room }}</p>
-        </ion-label>
-        <ion-badge slot="end" [color]="item.statusColor">{{ item.status }}</ion-badge>
-      </ion-item>
-    </ion-list>
-  </div>
+  
 </ion-content>
