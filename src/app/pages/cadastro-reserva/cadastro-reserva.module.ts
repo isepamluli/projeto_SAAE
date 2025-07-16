@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
-import { UserProfilePageRoutingModule } from './user-profile-routing.module';
+import { CadastroReservaPageRoutingModule } from './cadastro-reserva-routing.module';
 
-import { UserProfilePage } from './user-profile.page';
+import { CadastroReservaPage } from './cadastro-reserva.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserProfilePageRoutingModule
+    CadastroReservaPageRoutingModule
   ],
-  declarations: [UserProfilePage]
+  declarations: [CadastroReservaPage]
 })
-export class UserProfilePageModule {}
+export class CadastroReservaPageModule {}

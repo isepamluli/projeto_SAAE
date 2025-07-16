@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import { IonicModule, NavController, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NotificacoesPage } from '../notificacoes/notificacoes.page'; // ajuste o caminho se necessário
+import { IonicModule, NavController, ModalController } from '@ionic/angular';
+import { NotificacoesPage } from '../notificacoes/notificacoes.page';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, IonicModule] // ← IMPORTANTE!
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit {
+  tipoUsuario: string = '';
+
   recentBookings = [
     {
       title: 'Reunião de Planejamento',
@@ -39,13 +41,15 @@ export class DashboardPage {
     }
   ];
 
-  constructor(
-    private navCtrl: NavController,
-    private modalCtrl: ModalController
-  ) {}
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController) {}
+
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('usuarioLogado')!);
+    this.tipoUsuario = user?.tipo || 'Professor';
+  }
 
   openScheduling() {
-    this.navCtrl.navigateForward('/cadastro-agenda');
+    this.navCtrl.navigateForward('/cadastro-reserva');
   }
 
   viewAvailability() {
@@ -59,21 +63,45 @@ export class DashboardPage {
   viewReports() {
     this.navCtrl.navigateForward('/relatorios');
   }
-  openScheduling1() {
-  this.navCtrl.navigateForward('/perfil');
-}
 
-  
+  manageUsers() {
+    this.navCtrl.navigateForward('/usuarios');
+  }
+
+  openSettings() {
+    this.navCtrl.navigateForward('/configuracoes');
+  }
+
+  openScheduling1() {
+    this.navCtrl.navigateForward('/perfil');
+  }
+  openConsultaGeral() {
+  this.navCtrl.navigateForward('/consulta-agendamentos');
+  }
+  openGestaoProfessores() {
+  this.navCtrl.navigateForward('/gestao-professores');
+  }
+  openDetalhesAgendamentos() {
+  this.navCtrl.navigateForward('/detalhes-agendamentos');
+  }
+  openGerenciarSalas() {
+  this.navCtrl.navigateForward('/consulta-salas');
+  }
+  viewLogs() {
+    this.navCtrl.navigateForward('/logs');
+  }
+  generateReports() {
+    this.navCtrl.navigateForward('/relatorios-tecnicos');
+  }
+
+
 
   async checkNotifications() {
     const modal = await this.modalCtrl.create({
       component: NotificacoesPage,
       breakpoints: [0, 0.75, 1],
-      initialBreakpoint: 0.75,
-      showBackdrop: true,
-      canDismiss: true
+      initialBreakpoint: 0.75
     });
-
     await modal.present();
   }
 }

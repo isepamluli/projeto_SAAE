@@ -13,13 +13,10 @@ export class LoginPage {
   email: string = '';
   senha: string = '';
   loading: boolean = false;
-
-  // Variável para controlar a visibilidade da senha
   showPassword: boolean = false;
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController) {}
 
-  // Método para alternar a visibilidade da senha
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -38,20 +35,32 @@ export class LoginPage {
 
     this.loading = true;
 
-    // Simulação de autenticação
-    setTimeout(() => {
+    setTimeout(async () => {
       this.loading = false;
-      if (this.email === 'admin@teste.com' && this.senha === '123456') {
+
+      const usuarios = [
+        { email: 'professor@teste.com', senha: '123456', tipo: 'Professor' },
+        { email: 'coordenador@teste.com', senha: '123456', tipo: 'Coordenador' },
+        { email: 'diretor@teste.com', senha: '123456', tipo: 'Diretor' },
+        { email: 'chefe.ti@teste.com', senha: '123456', tipo: 'Chefe de TI' },
+        { email: 'administrativo@teste.com', senha: '123456', tipo: 'Funcionário Administrativo' }
+      ];
+
+      const usuario = usuarios.find(u => u.email === this.email && u.senha === this.senha);
+
+      if (usuario) {
+        localStorage.setItem('usuarioLogado', JSON.stringify({ tipo: usuario.tipo }));
         this.navCtrl.navigateRoot('/dashboard');
       } else {
-        this.toastCtrl.create({
+        const toast = await this.toastCtrl.create({
           message: 'Email ou senha incorretos.',
           duration: 2000,
           color: 'danger',
           position: 'top',
-        }).then(toast => toast.present());
+        });
+        toast.present();
       }
-    }, 1500);
+    }, 1000);
   }
 
   goToRecuperarSenha() {

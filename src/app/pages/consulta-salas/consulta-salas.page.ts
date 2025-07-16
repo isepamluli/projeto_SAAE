@@ -69,6 +69,8 @@ export class ConsultaSalasPage {
               color: 'success'
             });
             await toast.present();
+
+            return true; // Permite fechar o alert
           }
         }
       ]
@@ -92,6 +94,58 @@ export class ConsultaSalasPage {
               color: 'danger'
             });
             await toast.present();
+
+            return true; // Permite fechar o alert
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async criarSala() {
+    const alert = await this.alertController.create({
+      header: 'Criar Nova Sala',
+      inputs: [
+        { name: 'nome', type: 'text', placeholder: 'Nome da sala' },
+        { name: 'descricao', type: 'text', placeholder: 'Descrição' },
+        { name: 'numero', type: 'number', placeholder: 'Número' },
+        { name: 'capacidade', type: 'number', placeholder: 'Capacidade' },
+        { name: 'tipo', type: 'text', placeholder: 'Tipo de sala' }
+      ],
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Criar',
+          handler: async (data) => {
+            if (!data.nome || !data.numero) {
+              const toast = await this.toastController.create({
+                message: 'Nome e número são obrigatórios.',
+                duration: 2000,
+                color: 'warning'
+              });
+              await toast.present();
+              return false; // bloqueia fechar o alert
+            }
+
+            const novoId = this.salas.length > 0 ? Math.max(...this.salas.map(s => s.id)) + 1 : 1;
+            this.salas.push({
+              id: novoId,
+              nome: data.nome,
+              descricao: data.descricao || '',
+              numero: data.numero,
+              capacidade: data.capacidade || 0,
+              tipo: data.tipo || ''
+            });
+
+            const toast = await this.toastController.create({
+              message: 'Sala criada com sucesso!',
+              duration: 2000,
+              color: 'success'
+            });
+            await toast.present();
+
+            return true; // Permite fechar o alert
           }
         }
       ]

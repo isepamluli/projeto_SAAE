@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  // Redirecionamento inicial
   {
     path: '',
     redirectTo: 'login',
@@ -89,32 +90,53 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadComponent: () => import('./pages/user-profile/user-profile.page').then(m => m.UserProfilePage),
+    loadComponent: () =>
+      import('./pages/user-profile/user-profile.page').then(m => m.UserProfilePage),
   },
 
-  // 🚀 Nova rota adicionada:
+  // ⚙️ Administração e Permissões
   {
     path: 'usuarios',
-    loadComponent: () => import('./pages/usuarios/usuarios.page').then(m => m.UsuariosPage),
+    loadComponent: () =>
+      import('./pages/usuarios/usuarios.page').then(m => m.UsuariosPage),
   },
   {
-  path: 'controle-acesso',
+    path: 'controle-acesso',
+    loadComponent: () =>
+      import('./pages/controle-acesso/controle-acesso.page').then(m => m.ControleAcessoPage),
+  },
+
+  // 🧾 Reservas e Cancelamentos
+  {
+    path: 'minhas-reservas',
+    loadComponent: () =>
+      import('./pages/minhas-reservas/minhas-reservas.page').then(m => m.MinhasReservasPage),
+  },
+  {
+    path: 'cancelar-agendamento',
+    loadComponent: () =>
+      import('./pages/cancelar-agendamento/cancelar-agendamento.page').then(m => m.CancelarAgendamentoPage),
+  },
+  {
+  path: 'cadastro-reserva',
   loadComponent: () =>
-    import('./pages/controle-acesso/controle-acesso.page').then(m => m.ControleAcessoPage),
+    import('./pages/cadastro-reserva/cadastro-reserva.page').then(m => m.CadastroReservaPage)
   },
   {
-  path: 'minhas-reservas',
-  loadComponent: () => import('./pages/minhas-reservas/minhas-reservas.page').then(m => m.MinhasReservasPage) 
+  path: 'cadastro-reserva-data',
+  loadComponent: () => import('./pages/cadastro-reserva-data/cadastro-reserva-data.page').then(m => m.CadastroReservaDataPage)
   },
-  
 
 
 
-  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

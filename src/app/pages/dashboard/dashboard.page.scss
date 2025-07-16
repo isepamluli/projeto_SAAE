@@ -94,6 +94,7 @@ ion-content {
     }
   }
 }
+
 .dash-card {
   text-align: center;
   --background: var(--ion-color-light);
@@ -111,4 +112,12 @@ ion-content {
     margin: 0;
     color: var(--ion-color-dark);
   }
+}
+
+.center-button-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

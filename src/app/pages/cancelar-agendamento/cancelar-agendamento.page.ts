@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { IonicModule, NavController } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cancelar-agendamento',
   templateUrl: './cancelar-agendamento.page.html',
   styleUrls: ['./cancelar-agendamento.page.scss'],
   standalone: true,
-  imports: []
+  imports: [CommonModule, FormsModule, IonicModule],
 })
 export class CancelarAgendamentoPage {
   agendamentos = [
@@ -23,7 +25,7 @@ export class CancelarAgendamentoPage {
       sala: 'Sala 03',
       data: '2025-06-12',
       hora: '09:00',
-    }
+    },
   ];
 
   constructor(private navCtrl: NavController) {}
