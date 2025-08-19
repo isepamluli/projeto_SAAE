@@ -59,6 +59,11 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/cadastro-tipo-sala/cadastro-tipo-sala.page').then(m => m.CadastroTipoSalaPage),
   },
+  {
+    path: 'cadastro-recursos',
+    loadComponent: () =>
+      import('./pages/cadastro-recursos/cadastro-recursos.page').then(m => m.CadastroRecursosPage),
+  },
 
   // 🔎 Consultas
   {
@@ -147,13 +152,10 @@ const routes: Routes = [
       import('./pages/ver-logs/ver-logs.page').then(m => m.VerLogsPage),
   },
   {
-  path: 'visualizacao-detalhada',
-  loadComponent: () =>
-    import('./pages/visualizacao-detalhada/visualizacao-detalhada.page').then(m => m.VisualizacaoDetalhadaPage),
+    path: 'visualizacao-detalhada',
+    loadComponent: () =>
+      import('./pages/visualizacao-detalhada/visualizacao-detalhada.page').then(m => m.VisualizacaoDetalhadaPage),
   },
-  
-
-  
 ];
 
 @NgModule({
