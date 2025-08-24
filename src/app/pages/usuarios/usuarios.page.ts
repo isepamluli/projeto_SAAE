@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
+import { ApiService } from '../../services/api.service';
 
 interface Usuario {
-  id: number;
+  id?: number;
   nome: string;
   email: string;
-  nivel: 'Admin' | 'Gerente' | 'Funcionário';
+  telefone?: string;
+  senhaHash?: string;
 }
 
 @Component({
@@ -22,47 +24,56 @@ interface Usuario {
     IonicModule
   ],
 })
-export class UsuariosPage {
+export class UsuariosPage implements OnInit {
   usuarios: Usuario[] = [];
   form: FormGroup;
   modoEdicao = false;
   usuarioEditando: Usuario | null = null;
 
-  niveis = ['Admin', 'Gerente', 'Funcionário'];
-
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
+    private api: ApiService
   ) {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      nivel: ['Funcionário', Validators.required],
+      telefone: [''],
+      senhaHash: ['123456'],
     });
   }
 
   ngOnInit() {
-    this.usuarios = [
-      { id: 1, nome: 'João Silva', email: 'joao@email.com', nivel: 'Admin' },
-      { id: 2, nome: 'Maria Souza', email: 'maria@email.com', nivel: 'Gerente' },
-    ];
+    this.carregarUsuarios();
+  }
+
+  carregarUsuarios() {
+    this.api.getUsuarios().subscribe({
+      next: (res) => {
+        this.usuarios = res;
+      },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: 'Erro ao carregar usuários',
+          duration: 2000,
+          color: 'danger'
+        });
+        toast.present();
+      }
+    });
   }
 
   iniciarCriacao() {
     this.modoEdicao = false;
     this.usuarioEditando = null;
-    this.form.reset({ nivel: 'Funcionário' });
+    this.form.reset({ senhaHash: '123456' });
   }
 
   iniciarEdicao(usuario: Usuario) {
     this.modoEdicao = true;
     this.usuarioEditando = usuario;
-    this.form.setValue({
-      nome: usuario.nome,
-      email: usuario.email,
-      nivel: usuario.nivel,
-    });
+    this.form.patchValue(usuario);
   }
 
   async salvar() {
@@ -70,7 +81,7 @@ export class UsuariosPage {
       const toast = await this.toastCtrl.create({
         message: 'Preencha todos os campos corretamente.',
         duration: 2000,
-        color: 'danger',
+        color: 'danger'
       });
       toast.present();
       return;
@@ -78,19 +89,49 @@ export class UsuariosPage {
 
     const dados = this.form.value;
 
-    if (this.modoEdicao && this.usuarioEditando) {
-      const index = this.usuarios.findIndex(u => u.id === this.usuarioEditando!.id);
-      if (index > -1) {
-        this.usuarios[index] = { id: this.usuarioEditando.id, ...dados };
-      }
-      this.usuarioEditando = null;
-      this.modoEdicao = false;
+    if (this.modoEdicao && this.usuarioEditando?.id) {
+      this.api.updateUsuario(this.usuarioEditando.id, dados).subscribe({
+        next: async () => {
+          this.carregarUsuarios();
+          this.cancelarEdicao();
+          const toast = await this.toastCtrl.create({
+            message: 'Usuário atualizado com sucesso!',
+            duration: 2000,
+            color: 'success'
+          });
+          toast.present();
+        },
+        error: async () => {
+          const toast = await this.toastCtrl.create({
+            message: 'Erro ao atualizar usuário.',
+            duration: 2000,
+            color: 'danger'
+          });
+          toast.present();
+        }
+      });
     } else {
-      const novoId = this.usuarios.length ? Math.max(...this.usuarios.map(u => u.id)) + 1 : 1;
-      this.usuarios.push({ id: novoId, ...dados });
+      this.api.createUsuario(dados).subscribe({
+        next: async () => {
+          this.carregarUsuarios();
+          this.form.reset({ senhaHash: '123456' });
+          const toast = await this.toastCtrl.create({
+            message: 'Usuário criado com sucesso!',
+            duration: 2000,
+            color: 'success'
+          });
+          toast.present();
+        },
+        error: async () => {
+          const toast = await this.toastCtrl.create({
+            message: 'Erro ao criar usuário.',
+            duration: 2000,
+            color: 'danger'
+          });
+          toast.present();
+        }
+      });
     }
-
-    this.form.reset({ nivel: 'Funcionário' });
   }
 
   async confirmarExclusao(usuario: Usuario) {
@@ -104,20 +145,39 @@ export class UsuariosPage {
           role: 'destructive',
           handler: () => {
             this.excluir(usuario);
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     await alert.present();
   }
 
   excluir(usuario: Usuario) {
-    this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+    if (!usuario.id) return;
+    this.api.deleteUsuario(usuario.id).subscribe({
+      next: async () => {
+        this.carregarUsuarios();
+        const toast = await this.toastCtrl.create({
+          message: 'Usuário deletado com sucesso!',
+          duration: 2000,
+          color: 'success'
+        });
+        toast.present();
+      },
+      error: async () => {
+        const toast = await this.toastCtrl.create({
+          message: 'Erro ao deletar usuário.',
+          duration: 2000,
+          color: 'danger'
+        });
+        toast.present();
+      }
+    });
   }
 
   cancelarEdicao() {
     this.usuarioEditando = null;
     this.modoEdicao = false;
-    this.form.reset({ nivel: 'Funcionário' });
+    this.form.reset({ senhaHash: '123456' });
   }
 }

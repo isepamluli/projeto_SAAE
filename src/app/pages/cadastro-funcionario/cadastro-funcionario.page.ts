@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
 export class CadastroFuncionarioPage {
   funcionario = {
     nome: '',
-    email: '',  // ← substituto de telefone
+    telefone: '',
+    email: '',
     senha: '',
     confirmarSenha: '',
     tipo: ''
@@ -37,7 +39,8 @@ export class CadastroFuncionarioPage {
 
   constructor(
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private api: ApiService
   ) {}
 
   togglePasswordVisibility() {
@@ -52,12 +55,26 @@ export class CadastroFuncionarioPage {
 
     this.loading = true;
 
-    setTimeout(async () => {
-      this.loading = false;
-      console.log('Funcionário cadastrado:', this.funcionario);
-      await this.mostrarToast('Cadastro realizado com sucesso!', 'success');
-      this.router.navigate(['/dashboard']);
-    }, 1500);
+    this.api.createUsuario({
+      nome: this.funcionario.nome,
+      email: this.funcionario.email,
+      telefone: this.funcionario.telefone,
+      senha: this.funcionario.senha   // ✅ backend espera "senha"
+    }).subscribe({
+      next: async () => {
+        this.loading = false;
+        await this.mostrarToast('Cadastro realizado com sucesso!', 'success');
+        this.router.navigate(['/dashboard']);
+      },
+      error: async (err) => {
+        this.loading = false;
+        console.error("❌ Erro ao cadastrar:", err);
+        await this.mostrarToast(
+          err?.error?.error || 'Erro ao cadastrar funcionário!',
+          'danger'
+        );
+      }
+    });
   }
 
   async mostrarToast(mensagem: string, cor: string) {

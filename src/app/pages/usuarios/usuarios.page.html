@@ -6,17 +6,24 @@
 
 <ion-content class="ion-padding">
   <!-- Lista Usuários -->
-  <ion-list>
+  <ion-list *ngIf="usuarios.length > 0; else semUsuarios">
     <ion-item *ngFor="let usuario of usuarios" button (click)="iniciarEdicao(usuario)">
       <ion-label>
         <h2>{{ usuario.nome }}</h2>
-        <p>{{ usuario.email }} - {{ usuario.nivel }}</p>
+        <p>{{ usuario.email }} - {{ usuario.telefone }}</p>
       </ion-label>
-      <ion-button slot="end" color="danger" fill="clear" (click)="confirmarExclusao(usuario); $event.stopPropagation();">
+      <ion-button slot="end" color="danger" fill="clear"
+        (click)="confirmarExclusao(usuario); $event.stopPropagation();">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
+
+  <ng-template #semUsuarios>
+    <ion-text color="medium">
+      <p class="ion-text-center">Nenhum usuário cadastrado.</p>
+    </ion-text>
+  </ng-template>
 
   <ion-button expand="block" color="success" (click)="iniciarCriacao()">+ Novo Usuário</ion-button>
 
@@ -40,10 +47,13 @@
       </ion-note>
 
       <ion-item>
-        <ion-label>Nível de Permissão</ion-label>
-        <ion-select formControlName="nivel">
-          <ion-select-option *ngFor="let nivel of niveis" [value]="nivel">{{ nivel }}</ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input type="tel" formControlName="telefone"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="!modoEdicao">
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password" formControlName="senhaHash"></ion-input>
       </ion-item>
 
       <ion-button expand="block" type="submit" [disabled]="form.invalid">
